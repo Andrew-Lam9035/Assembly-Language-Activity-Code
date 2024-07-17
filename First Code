@@ -1,0 +1,11 @@
+section .text
+        global _start
+
+_start:
+        mov ebx,10	;ebx is a counter register
+        label:
+        dec ebx
+        loop label
+
+        mov eax,1
+        int 0x80
