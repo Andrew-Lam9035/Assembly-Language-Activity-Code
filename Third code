@@ -1,0 +1,35 @@
+section .text
+        global _start
+
+_start:
+        mov eax,4  ;Counter for the array
+        mov ebx,0 
+        mov ecx,array  
+        mov ebx, [ecx] ;Put the value of ecx from the first element into ebx  
+
+check: 
+        add ecx,4      ;Next value of the array
+        mov edx, [ecx] ;Make edx the next values
+        dec eax  ;Decrease the counter so if the counter is 0, then exits.
+        jz exit
+        cmp ebx, edx ; Compares ebx and edx to see which one is greater
+                                 ;If ebx is greater, then check will move on to the next value.
+                                 ;If edx is greater, then change ebx to the value in edx and move on through the loop
+        jg check
+        mov ebx, edx
+        jmp check
+                                ;This program keeps moving through the code until the counter is 0 and exits the system
+       
+        
+        
+exit: 
+        mov [largest], ebx   ;ebx should have the largest value and puts it inside largest.
+        mov eax,1       
+        int 0x80
+
+section .data
+        array dd 36,48,14,59    ;Random values
+        
+segment .bss
+        largest resb 1
+
