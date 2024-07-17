@@ -1,0 +1,25 @@
+section .text
+        global _start
+
+_start:
+        mov eax, 0
+        mov ebx, 1
+        
+        mov ecx, 5 ;ecx is a counter register
+        label:
+        add eax, ebx ;Adds the second number to the first number first.
+        add ebx, eax ;Then adds the first number to the second number.
+                                ;Just like the fibonacci sequence, add the last two numbers together to get the next number
+                                ;But this is done twice at once for 5 times
+        loop label
+
+
+        mov [result], eax ;After the whole program runs, eax should have 55 and put that in result.
+        mov eax,1
+        int 0x80
+        
+    
+
+
+segment .bss
+    result resb 1
